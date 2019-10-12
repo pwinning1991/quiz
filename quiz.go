@@ -4,12 +4,22 @@ import (
 	"encoding/csv"
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"strings"
 )
 
+func openFile(name string) *os.File {
+	file, err := os.Open(name)
+	if err != nil {
+		log.Fatal("unable to open CSV file %s", name)
+	}
+	return file
+
+}
+
 func main() {
-	csvFilename := flag.String("csv", "problems.csv", "a csv in the format of 'question,anser'")
+	csvFilename := flag.String("csv", "problems.csv", "a csv in the format of 'question,answer'")
 
 	flag.Parse()
 	file, err := os.Open(*csvFilename)
